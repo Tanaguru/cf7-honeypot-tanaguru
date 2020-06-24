@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: Honeypot for Contact Form 7
-Plugin URI: http://www.nocean.ca/plugins/honeypot-module-for-contact-form-7-wordpress-plugin/
+Plugin Name: Honeypot for Contact Form 7 - Tanaguru
+Plugin URI: https://github.com/Tanaguru/cf7-honeypot-tanaguru
 Description: Add honeypot anti-spam functionality to the popular Contact Form 7 plugin.
-Author: Nocean
+Author: Nocean & Tanaguru
 Author URI: http://www.nocean.ca
 Version: 1.14.1
 Text Domain: contact-form-7-honeypot
@@ -31,7 +31,7 @@ Domain Path: /languages/
 /**
 * Load textdomain
 *
-* Technically depreciated, all translations are handled via 
+* Technically depreciated, all translations are handled via
 * https://translate.wordpress.org/projects/wp-plugins/contact-form-7-honeypot
 * Leaving in the code for now.
 */
@@ -42,17 +42,25 @@ function wpcf7_honeypot_load_textdomain() {
 
 
 /**
- * 
+ *
  * Check if CF7 is installed and activated.
  * 		Deliver a message to install CF7 if not.
- * 
+ *
  */
 add_action( 'admin_init', 'wpcf7_honeypot_has_parent_plugin' );
 function wpcf7_honeypot_has_parent_plugin() {
-	if ( is_admin() && current_user_can( 'activate_plugins' ) &&  !is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) {
+
+	/**
+	 * #cf7-honeypot-tng-start
+	 * Change the path to Contact Form 7 file in order to make the plugin works with CF7 Tanaguru
+	 */
+	// if ( is_admin() && current_user_can( 'activate_plugins' ) &&  !is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) {
+	if ( is_admin() && current_user_can( 'activate_plugins' ) &&  !is_plugin_active( 'cf7-tanaguru/wp-contact-form-7.php' ) ) {
+	/* #cf7-honeypot-tng-end */
+
 		add_action( 'admin_notices', 'wpcf7_honeypot_nocf7_notice' );
 
-		deactivate_plugins( plugin_basename( __FILE__ ) ); 
+		deactivate_plugins( plugin_basename( __FILE__ ) );
 
 		if ( isset( $_GET['activate'] ) ) {
 			unset( $_GET['activate'] );
@@ -77,18 +85,18 @@ function wpcf7_honeypot_nocf7_notice() { ?>
  *
  * Initialize the shortcode
  * 		This lets CF7 know about Mr. Honeypot.
- * 
+ *
  */
 add_action('wpcf7_init', 'wpcf7_add_form_tag_honeypot', 10);
 function wpcf7_add_form_tag_honeypot() {
 
 	// Test if new 4.6+ functions exists
 	if (function_exists('wpcf7_add_form_tag')) {
-		wpcf7_add_form_tag( 
-			'honeypot', 
-			'wpcf7_honeypot_formtag_handler', 
-			array( 
-				'name-attr' => true, 
+		wpcf7_add_form_tag(
+			'honeypot',
+			'wpcf7_honeypot_formtag_handler',
+			array(
+				'name-attr' => true,
 				'do-not-store' => true,
 				'not-for-mail' => true
 			)
@@ -100,10 +108,10 @@ function wpcf7_add_form_tag_honeypot() {
 
 
 /**
- * 
+ *
  * Form Tag handler
  * 		This is where we generate the honeypot HTML from the shortcode options
- * 
+ *
  */
 function wpcf7_honeypot_formtag_handler( $tag ) {
 
@@ -119,7 +127,7 @@ function wpcf7_honeypot_formtag_handler( $tag ) {
 	$atts = array();
 	$atts['class'] = $tag->get_class_option( $class );
 	$atts['id'] = $tag->get_option( 'id', 'id', true );
-	
+
 	$atts['wrapper_id'] = $tag->get_option('wrapper-id');
 	$wrapper_id = (!empty($atts['wrapper_id'])) ? reset($atts['wrapper_id']) : uniqid('wpcf7-');
 
@@ -159,22 +167,22 @@ function wpcf7_honeypot_formtag_handler( $tag ) {
 
 
 /**
- * 
+ *
  * Honeypot Validation Filter
  * 		Bots beware!
- * 
+ *
  */
 add_filter( 'wpcf7_validate_honeypot', 'wpcf7_honeypot_filter' ,10,2);
 
 function wpcf7_honeypot_filter ( $result, $tag ) {
-	
+
 	// Test if new 4.6+ functions exists
 	$tag = (class_exists('WPCF7_FormTag')) ? new WPCF7_FormTag( $tag ) : new WPCF7_Shortcode( $tag );
 
 	$name = $tag->name;
 
 	$value = isset( $_POST[$name] ) ? $_POST[$name] : '';
-	
+
 	if ( $value != '' || !isset( $_POST[$name] ) ) {
 		$result['valid'] = false;
 		$result['reason'] = array( $name => wpcf7_get_message( 'spam' ) );
@@ -185,10 +193,10 @@ function wpcf7_honeypot_filter ( $result, $tag ) {
 
 
 /**
- * 
+ *
  * Tag generator
  * 		Adds Honeypot to the CF7 form editor
- * 
+ *
  */
 add_action( 'wpcf7_admin_init', 'wpcf7_add_tag_generator_honeypot', 35 );
 
@@ -305,7 +313,7 @@ function wpcf7_tg_pane_honeypot($contact_form, $args = '') {
 						</td>
 						<td></td>
 					</tr>
-					
+
 					<tr>
 						<td colspan="2"><hr></td>
 					</tr>
@@ -329,9 +337,9 @@ function wpcf7_tg_pane_honeypot($contact_form, $args = '') {
 
 					<tr>
 						<td colspan="2"><hr></td>
-					</tr>			
+					</tr>
 				</table>
-				
+
 				<div class="tg-tag"><?php echo esc_html( __( "Copy this code and paste it into the form left.", 'contact-form-7-honeypot' ) ); ?><br /><input type="text" name="honeypot" class="tag" readonly="readonly" onfocus="this.select()" /></div>
 			</form>
 		</div>
