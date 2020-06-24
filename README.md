@@ -7,7 +7,7 @@
 
 ## Introduction
 
-Ce répertoire Github héberge l'extension WordPress [Honeypot for Contact Form 7](https://wordpress.org/plugins/contact-form-7-honeypot/), crée par DaoByDesign et modifié par l'équipe Tanaguru.
+Ce répertoire Github héberge l'extension WordPress [Honeypot for Contact Form 7](https://wordpress.org/plugins/contact-form-7-honeypot/), crée par Nocean et modifié par l'équipe Tanaguru.
 
 ## Pourquoi ce plugin ?
 
@@ -79,7 +79,7 @@ Suivez les instructions suivantes pour mettre à jour le plugin CF7 Honeypot Tan
 
 ## Introduction
 
-This repository is the Tanaguru team's version of the WordPress Plugin [Honeypot for Contact Form 7](https://wordpress.org/plugins/contact-form-7-honeypot/) by DaoByDesign and modified by Tanaguru's team.
+This repository is the Tanaguru team's version of the WordPress Plugin [Honeypot for Contact Form 7](https://wordpress.org/plugins/contact-form-7-honeypot/) by Nocean and modified by Tanaguru's team.
 
 ## Why this plugin?
 
