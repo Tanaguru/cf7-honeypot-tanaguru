@@ -5,7 +5,7 @@ Plugin URI: https://github.com/Tanaguru/cf7-honeypot-tanaguru
 Description: Add honeypot anti-spam functionality to the popular Contact Form 7 plugin.
 Author: Nocean & Tanaguru
 Author URI: http://www.nocean.ca
-Version: 1.14.1
+Version: 1.15.1
 Text Domain: contact-form-7-honeypot
 Domain Path: /languages/
 */
@@ -55,7 +55,7 @@ function wpcf7_honeypot_has_parent_plugin() {
 	 * Change the path to Contact Form 7 file in order to make the plugin works with CF7 Tanaguru
 	 */
 	// if ( is_admin() && current_user_can( 'activate_plugins' ) &&  !is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) {
-	if ( is_admin() && current_user_can( 'activate_plugins' ) &&  !is_plugin_active( 'cf7-tanaguru/wp-contact-form-7.php' ) ) {
+	if ( is_admin() && current_user_can( 'activate_plugins' ) &&  !is_plugin_active( 'contact-form-7/wp-contact-form-7.php' ) ) {
 	/* #cf7-honeypot-tng-end */
 
 		add_action( 'admin_notices', 'wpcf7_honeypot_nocf7_notice' );
