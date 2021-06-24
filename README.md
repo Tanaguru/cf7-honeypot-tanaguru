@@ -1,6 +1,6 @@
 # CF7 Honeypot Tanaguru
 
-A fork of the “Honeypot for Contact Form 7” WordPress plugin to make it works with our [CF7 Tanaguru](https://github.com/Tanaguru/Cf7-tanaguru) plugin.
+A fork of the “Honeypot for Contact Form 7” WordPress plugin to make it works with our [CF7 Tanaguru](https://github.com/Tanaguru/contact-form-7) plugin.
 
 ## Introduction
 
@@ -8,7 +8,7 @@ This repository is the Tanaguru team's version of the WordPress Plugin [Honeypot
 
 ## Why this plugin?
 
-We have created a customise version of the Contact Form 7 plugin, [CF7 Tanaguru](https://github.com/Tanaguru/cf7-tanaguru), in order to fix its accessibility problems.
+We have created a customise version of the Contact Form 7 plugin, [CF7 Tanaguru](https://github.com/Tanaguru/contact-form-7), in order to fix its accessibility problems.
 
 Honeypot for Contact Form 7 is detecting the activation of Contact Form 7 so as to install itself. So, we need to customise this plugin to make it compatible with our CF7 Tanaguru plugin.
 
